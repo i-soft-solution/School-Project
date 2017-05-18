@@ -22,7 +22,11 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        
+        <style type="text/css">
+	#tab-list .close{
+		margin-left: 7px;
+	}
+	</style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -179,18 +183,19 @@ and open the template in the editor.
                              </span>
                          </div>
                     </form>
-                    <ul class="sidebar-menu">
-                        <li class="header">HEADER</li>
-                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-                         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                    
+                    <ul id="btn-add-tab" class="sidebar-menu"><!-- Menu -->
+                         <li class="header" style="color: white">i-Soft Solution</li>
+                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Student</span></a></li>
+                         <li><a href="#"><i class="fa fa-link"></i> <span>User</span></a></li>
                          <li class="treeview">
-                             <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                             <a href="#"><i class="fa fa-link"></i> <span>Administration</span>
                                  <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i> 
                                  </span>
                                  <ul class="treeview-menu">
-                                     <li><a href="#">Link in level 2</a></li>
-                                     <li><a href="#">Link in level 2</a></li>
+                                     <li><a href="#">SetUp Staff</a></li>
+                                     <li><a href="#">SetUp Class</a></li>
                                  </ul>
                          </li> 
                     </ul>
@@ -202,11 +207,41 @@ and open the template in the editor.
                       Page Header
                       <small>Optional description</small>
                    </h1>
-
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                    <!-- Your Page Content Here --> 
+                   <ul id="tab-list" class="nav nav-tabs" role="tablist">
+                      <li class="active"><a data-toggle="tab" href="#home"><button class="close" type="button">×</button>Home</a></li>
+                   </ul>
+                   <div id="tab-content" class="tab-content">
+                       <div id="home" class="tab-pane fade in active">
+                       <br></br>
+                       <button type="button" class="btn btn-info" data-toggle="collapse" data-parent="#accordion" data-target="#demo">Simple collapsible</button>
+                       <div id="demo" class="collapse in">
+                          <form>
+                              <div class="form-group">
+                                  <label for="usr">Name:</label>
+                                  <input type="text" class="form-control" id="usr">
+                              </div>
+                          </form>
+                       </div>
+                       <button type="button" class="btn btn-info" data-toggle="collapse" data-parent="#accordion" data-target="#demo1">Simple collapsible</button>
+                       
+                       <div id="demo1" class="collapse in">
+                          <form>
+                              <div class="form-group">
+                                  <label for="usr">Phone:</label>
+                                  <input type="text" class="form-control" id="usr">
+                              </div>
+                              <div class="form-group">
+                                  <label for="usr">Email:</label>
+                                  <input type="text" class="form-control" id="usr">
+                              </div>
+                          </form>
+                       </div>
+                       
+                       </div>
+                   </div>
                 </section>
             </div>
              <!-- Main Footer -->
@@ -216,10 +251,45 @@ and open the template in the editor.
                 </div>
                 <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
             </footer>
-             
         </div>
         <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="Sortable.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            var tabID = 1;
+            $('#btn-add-tab li').click(function () {
+                tabID++;
+                if($(this).closest('li').children('ul').length)
+                {
+                    
+                }else{
+                $('#tab-list').append($('<li><a href="#tab' + tabID + '" role="tab" data-toggle="tab">' + $(this).text() + '<button class="close" type="button" title="Remove this page">×</button></a></li>'));
+                }
+                $('#tab-content').append($('<div class="tab-pane fade" id="tab' + tabID + '">Tab '+ tabID +' content</div>'));
+                //$('#tab-content').load('student.jsp');
+            });
+            $('#tab-list').on('click','.close',function(){
+                var tabID = $(this).parents('a').attr('href');
+                $(this).parents('li').remove();
+                $(tabID).remove();
+
+                //display first tab
+                var tabFirst = $('#tab-list a:first');
+                tabFirst.tab('show');
+            });
+            
+           /* var text="Null";
+            $("#btn-add-tab li").click(function (){
+                    text=document.getElementById($(this).text());
+                    alter(text); 
+                });
+			
+			var list = document.getElementById("tab-list");
+			new Sortable(list);
+            */
+            });
+        </script>
     </body>
 </html>
