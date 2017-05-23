@@ -186,8 +186,9 @@ and open the template in the editor.
                     
                     <ul id="btn-add-tab" class="sidebar-menu"><!-- Menu -->
                          <li class="header" style="color: white">i-Soft Solution</li>
-                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Student</span></a></li>
-                         <li><a href="#"><i class="fa fa-link"></i> <span>User</span></a></li>
+                         <li class="active"><a href="#"><i class="fa fa-circle"></i><span>student</span></a></li>
+                         <li ><a href="#"><i class="fa fa-link"></i><span>teacher</span></a></li>
+                         <li><a href="#"><i class="fa fa-link"></i><span>User</span></a></li>
                          <li class="treeview">
                              <a href="#"><i class="fa fa-link"></i> <span>Administration</span>
                                  <span class="pull-right-container">
@@ -212,6 +213,7 @@ and open the template in the editor.
                 <section class="content">
                    <ul id="tab-list" class="nav nav-tabs" role="tablist">
                       <li class="active"><a data-toggle="tab" href="#home"><button class="close" type="button">×</button>Home</a></li>
+                      
                    </ul>
                    <div id="tab-content" class="tab-content">
                        <div id="home" class="tab-pane fade in active">
@@ -240,7 +242,10 @@ and open the template in the editor.
                           </form>
                        </div>
                        
+                       
+                       
                        </div>
+                       
                    </div>
                 </section>
             </div>
@@ -265,10 +270,17 @@ and open the template in the editor.
                 {
                     
                 }else{
-                $('#tab-list').append($('<li><a href="#tab' + tabID + '" role="tab" data-toggle="tab">' + $(this).text() + '<button class="close" type="button" title="Remove this page">×</button></a></li>'));
+                $('#tab-list').append($('<li><a href="#tab' + tabID + '" role="tab" data-toggle="tab">'+$(this).text()+'<button class="close" type="button" title="Remove this page">×</button></a></li>'));
+                
                 }
-                $('#tab-content').append($('<div class="tab-pane fade" id="tab' + tabID + '">Tab '+ tabID +' content</div>'));
-                //$('#tab-content').load('student.jsp');
+                var link =  $.trim($(this).text());
+                $('#tab-content').append($('<div id="tab'+tabID+'" class="tab-pane fade in"></div>'));
+//                $('')
+                
+                //var ext = '.jsp';
+                //alert((''+$(this).text()+'.jsp').length);
+                //alert('student.jsp'.length);
+                $('#tab'+tabID+'').load(''+$(this).text()+'.jsp');
             });
             $('#tab-list').on('click','.close',function(){
                 var tabID = $(this).parents('a').attr('href');
